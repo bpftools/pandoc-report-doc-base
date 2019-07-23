@@ -4,8 +4,7 @@ This is meant to make it easy to add a new report to pandoc.
 
 ## Getting started
 
-1. Create a copy of this repo in your name on github
- 1. You can do this by "forking" this repo, then renaming it to something different
+1. Create a copy of this repo in your name on github by clicking the "Use this template button" 
 1. Add docs to the docs folder in pandoc flavored markdown (they will be built in lexicographical order)
 1. Run `make` to get your output
 
