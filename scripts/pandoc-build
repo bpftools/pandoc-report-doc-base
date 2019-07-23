@@ -2,12 +2,15 @@
 
 FORMATS=(html pdf epub)
 
+set -x
+
 # See pandoc documentation
 # https://pandoc.org/MANUAL.html
 # for more details if you want to tweak
 pandoc_build()
 {
-  mkdir -p output
+
+  format=$1
 
   # FIXME can this be DRYed up a bit?
   if [ "${format}" == "html" ];then
@@ -17,9 +20,9 @@ pandoc_build()
       --metadata link-citations=true \
       --bibliography=bibliography.yaml \
       --csl ieee-with-url.csl \
-      --template=./templates/GitHub.html5
-      --filter .bin/pandoc-citeproc \
-      --filter .bin/pandoc-include-code -s --highlight-style espresso \
+      --template=./templates/GitHub.html5 \
+      --filter pandoc-citeproc \
+      --filter pandoc-include-code -s --highlight-style espresso \
       -o output/doc.${format}
 
   else
@@ -29,11 +32,14 @@ pandoc_build()
       --metadata link-citations=true \
       --bibliography=bibliography.yaml \
       --csl ieee-with-url.csl \
-      --filter .bin/pandoc-citeproc \
-      --filter .bin/pandoc-include-code -s --highlight-style espresso \
+      --filter pandoc-citeproc \
+      --filter pandoc-include-code -s --highlight-style espresso \
       -o output/doc.${format}
   fi
 }
 
+mkdir -p output
+
 for format in "${FORMATS[@]}";do
+  pandoc_build ${format}
 done

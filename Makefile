@@ -13,14 +13,14 @@ clean:
 	docker rm -f ${DOCKER_BUILDER} || true
 
 .PHONY: _doc/builder/run
-_doc/builder/run: clean submodules
-	${DOCKER} run -v ${PWD}/docs:/app \
+_doc/builder/run: clean
+	${DOCKER} run -v ${PWD}:/app \
            --name ${DOCKER_BUILDER} \
            -d ${PANDOC_BUILDER_IMAGE} \
            /bin/sh -c 'sleep infinity'
 
 .PHONY: doc/build
-doc/build:
-	scripts/pandoc-build
+doc/build: _doc/builder/run
+	${DOCKER} exec ${DOCKER_BUILDER} /app/scripts/pandoc-build
 
 all: doc/build
