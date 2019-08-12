@@ -6,7 +6,9 @@ FORMATS=(html pdf epub)
 # builtin styles:
 # pygments tango espresso zenburn kate
 # monochrome breezedark haddock
-STYLE=tango
+CODE_HIGHLIGHT_STYLE=tango
+
+BIB_FORMAT_CSL=ieee-with-url
 
 set -x
 
@@ -26,10 +28,10 @@ pandoc_build()
       --metadata date="$( date +'%D %X %Z')" \
       --metadata link-citations=true \
       --bibliography=bibliography.yaml \
-      --csl ieee-with-url.csl \
+      --csl "${BIB_FORMAT_CSL}.csl" \
       --template=./templates/GitHub.html5 \
       --filter pandoc-citeproc \
-      --filter pandoc-include-code -s --highlight-style $STYLE \
+      --filter pandoc-include-code -s --highlight-style ${CODE_HIGHLIGHTSTYLE} \
       -o output/doc.${format}
 
   elif [ "${format}" == "pdf" ];then
@@ -38,9 +40,9 @@ pandoc_build()
       --metadata date="$( date +'%D %X %Z')" \
       --metadata link-citations=true \
       --bibliography=bibliography.yaml \
-      --csl ieee-with-url.csl \
+      --csl "${BIB_FORMAT_CSL}.csl" \
       --filter pandoc-citeproc \
-      --filter pandoc-include-code -s --highlight-style $STYLE \
+      --filter pandoc-include-code -s --highlight-style ${CODE_HIGHLIGHT_STYLE} \
       -o output/doc.${format}
   else
      pandoc docs/*.md --toc \
@@ -48,9 +50,9 @@ pandoc_build()
       --metadata date="$( date +'%D %X %Z')" \
       --metadata link-citations=true \
       --bibliography=bibliography.yaml \
-      --csl ieee-with-url.csl \
+      --csl "${BIB_FORMAT_CSL}.csl" \
       --filter pandoc-citeproc \
-      --filter pandoc-include-code -s --highlight-style $STYLE \
+      --filter pandoc-include-code -s --highlight-style ${CODE_HIGHLIGHT_STYLE} \
       -o output/doc.${format}
   fi
 }

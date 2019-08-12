@@ -40,6 +40,18 @@ version as a separate, shallow submodule.
 
 You can also set the highlight style for your code.
 
+You can see the available languages for highlight (above cpp was used) with:
+
+```bash
+docker run --user `id -u`:`id -g`  "quay.io/dalehamel/pandoc-report-builder"  pandoc --list-highlight-languages
+```
+
+And the available code styles with:
+
+```bash
+docker run --user `id -u`:`id -g`  "quay.io/dalehamel/pandoc-report-builder"  pandoc --list-highlight-styles
+```
+
 ## References
 
 Citing work and giving people credit where it is due is very important! It also helps to build a community, help search-engines raise the profile of work that is linked to, and make it easy for readers to follow up on the sources for their own discovery.
