@@ -24,17 +24,40 @@ You can easily annotate code thanks to the inclusion of https://github.com/owick
 For example, add a repository to the src directory (see [the readme for that](src/README.md)), and then you can reference it like:
 
 ````
-```{.cpp include=src/path-to-src startLine=313 endLine=345}
+```{.cpp include=src/path-to-src startLine=SOME_LINE endLine=END_LINE}
 ```
 ````
 
-You can also setthe highlight style for your code.
+Or include a whole file (for small files):
+
+````
+```{.cpp include=src/path-to-src }
+```
+````
+
+If you want to comment on different versions of the same repository, add each
+version as a separate, shallow submodule.
+
+You can also set the highlight style for your code.
 
 ## References
 
 Citing work and giving people credit where it is due is very important! It also helps to build a community, help search-engines raise the profile of work that is linked to, and make it easy for readers to follow up on the sources for their own discovery.
 
 We use pandoc-citeproc to parse bibliography.yml, and use the ieee reference format, though you cat substitute in anything that works with a sort of bibtex csl style.
+
+You can easily reference other people's hard work within the markdone using the 
+syntax:
+
+```
+[@some-bibliography-id]
+```
+
+Where `some-bibliography-id`, is the `id` field of some bibliography entry. The
+format of this bibliography.yml file can be found in the pandoc documentation.
+
+By default, the ieee bibliography format is used an included, but you can easily
+specify your own.
 
 # Dependencies
 
