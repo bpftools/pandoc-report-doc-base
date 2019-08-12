@@ -14,11 +14,21 @@ This is meant to make it easy to add a new report to pandoc.
 
 By default, this can output pdf (via pdflatex), epub (via pandoc) and html (via pandoc).
 
-For html, you can apply a style. We use github by default.
+For html, you can apply a style. We use github by default. You can specify
+your own pandoc template if you like, but by default the github template is used.
 
 ## Code annotation
 
 You can easily annotate code thanks to the inclusion of https://github.com/owickstrom/pandoc-include-code
+
+For example, add a repository to the src directory (see [the readme for that](src/README.md)), and then you can reference it like:
+
+````
+```{.cpp include=src/path-to-src startLine=313 endLine=345}
+```
+````
+
+You can also setthe highlight style for your code.
 
 ## References
 
@@ -29,3 +39,10 @@ We use pandoc-citeproc to parse bibliography.yml, and use the ieee reference for
 # Dependencies
 
 A \*nix system, with a modern gnu `make` and a `docker` build environment
+
+# Publishing to github pages
+
+Check out the sample travis file. All you need to do is add your repo to travis,
+add a developer token to allow pushing to public repos so that travis can
+push to a gh-pages branch, and you can automatically publish the report to
+github pages.
