@@ -31,7 +31,7 @@ pandoc_build()
       --csl "${BIB_FORMAT_CSL}.csl" \
       --template=./templates/GitHub.html5 \
       --filter pandoc-citeproc \
-      --filter pandoc-include-code -s --highlight-style ${CODE_HIGHLIGHTSTYLE} \
+      --filter pandoc-include-code -s --highlight-style ${CODE_HIGHLIGHT_STYLE} \
       -o output/doc.${format}
 
   elif [ "${format}" == "pdf" ];then
