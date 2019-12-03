@@ -1,0 +1,3 @@
+mctop "em see top"
+uprobe "you probe"
+"const\\\s\\\+char\\\s\\\+*" "const ... char ... star"
