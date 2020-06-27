@@ -13,12 +13,12 @@ clean:
 
 .PHONY: doc/build
 doc/build:
-	${DOCKER} run --user `id -u`:`id -g` -v ${PWD}:/app ${PANDOC_BUILDER_IMAGE} /app/scripts/pandoc-build $(FORMATS)
+	${DOCKER} run -ti --user `id -u`:`id -g` -v ${PWD}:/app ${PANDOC_BUILDER_IMAGE} /app/scripts/pandoc-build $(FORMATS)
 
 # If docx is shared, this can be used for diffing markdown representation
 # of the docx export before and after modifications. Useful for google sharing
 output/doc.md:
-	${DOCKER} run --user `id -u`:`id -g` -v ${PWD}:/app ${PANDOC_BUILDER_IMAGE} pandoc doc.docx -o output/doc.md
+	${DOCKER} run -ti --user `id -u`:`id -g` -v ${PWD}:/app ${PANDOC_BUILDER_IMAGE} pandoc doc.docx -o output/doc.md
 
 index.html:
 	ln -sf output/doc.html index.html
@@ -29,11 +29,11 @@ quirks:
 
 .PHONY: plain
 plain:
-	${DOCKER} run --user `id -u`:`id -g` -v ${PWD}:/app ${PANDOC_BUILDER_IMAGE} /app/scripts/pandoc-build plain
+	${DOCKER} run -ti --user `id -u`:`id -g` -v ${PWD}:/app ${PANDOC_BUILDER_IMAGE} /app/scripts/pandoc-build plain
 
 .PHONY: audio
 audio: plain
-	${DOCKER} run --user `id -u`:`id -g` -v ${PWD}:/app ${PANDOC_BUILDER_IMAGE} /app/scripts/make-audio
+	${DOCKER} run -ti --user `id -u`:`id -g` -v ${PWD}:/app ${PANDOC_BUILDER_IMAGE} /app/scripts/make-audio
 
 .PHONY: outputs
 outputs: doc/build index.html
