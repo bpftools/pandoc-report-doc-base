@@ -77,7 +77,28 @@ A \*nix system, with a modern gnu `make` and a `docker` build environment
 
 # Publishing to github pages
 
-Check out the sample travis file. All you need to do is add your repo to travis,
-add a developer token to allow pushing to public repos so that travis can
-push to a gh-pages branch, and you can automatically publish the report to
-github pages.
+The template includes a gitub actions workflow that will publish the page.
+
+Note that you may need to manually push once yourself to the gh-pages branch
+in order for the initial page build pipeline to be created, but subsequent
+pushes should result in updates.
+
+## Travis (optional alternative)
+
+The following can be used to build and publish to github pages with travis CI:
+
+```
+language: generic
+dist: bionic
+services:
+- docker
+script:
+- make
+- rm .gitignore
+env: // Add secret here via travis instructions
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: "$GITHUB_TOKEN"
+  target_branch: gh-pages
+```
